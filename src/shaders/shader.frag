@@ -1,12 +1,20 @@
 uniform float time;
 uniform vec2 resolution;
 
-const float x_center = -0.5;
-const float y_center = 0.0;
-const float zoom = 2.0;
+uniform float x_center;
+uniform float y_center;
+uniform float zoom;
 
-const float er = 2.0;
-const int bailout = 256;
+uniform float x_min;
+uniform float x_max;
+
+uniform float y_min;
+uniform float y_max;
+
+uniform float er;
+uniform int bailout;
+
+const int max_bailout = 50000;
 
 float process_point(vec2 c) {
   vec2 z = vec2(0.0);
@@ -14,7 +22,10 @@ float process_point(vec2 c) {
 
   float er_squared = er * er;
 
-  for (int i = 0; i < bailout; i++) {
+  for (int i = 0; i < max_bailout; i++) {
+    if (i > bailout)
+      break;
+
     zn.x = z.x * z.x - z.y * z.y + c.x;
     zn.y = 2.0 * z.x * z.y + c.y;
 
@@ -29,12 +40,6 @@ float process_point(vec2 c) {
 }
 
 void main() {
-  float x_min = x_center - zoom;
-  float x_max = x_center + zoom;
-
-  float y_min = y_center - zoom;
-  float y_max = y_center + zoom;
-
   vec2 uv = gl_FragCoord.xy / resolution.xy;
 
   vec2 c = vec2(gl_FragCoord.xy);
