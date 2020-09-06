@@ -21,7 +21,7 @@ float process_point(vec2 c) {
     z = zn;
 
     if ( z.x * z.x + z.y * z.y > er_squared ) {
-      return 1.0;
+      return float(i) / float (bailout);
     }
   }
 
