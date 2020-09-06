@@ -1,6 +1,6 @@
 class Mandelbrot {
   public x_center = -0.5;
-  public y_center = -0.5;
+  public y_center = 0.0;
 
   public zoom = 2.0;
 
