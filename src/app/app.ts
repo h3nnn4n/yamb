@@ -38,6 +38,7 @@ export class App {
     this.uniforms = {
       resolution:  { value: new Vector3() },
       time: { value: 0 },
+
       x_center: { value: -0.5 },
       y_center: { value: 0.0 },
       zoom: { value: 2.0 },
@@ -80,20 +81,21 @@ export class App {
   }
 
   private render() {
+    this.adjustCanvasSize();
     this.update();
 
     this.renderer.render(this.scene, this.camera);
     requestAnimationFrame(() => { this.render(); });
-
-    this.adjustCanvasSize();
   }
 
   private update() {
     const now = Date.now() / 1000.0;
     this.lastTime = now;
 
-    this.uniforms.resolution.value.set(this.canvas.width, this.canvas.height, 1);
     this.uniforms.time.value = now;
+    this.uniforms.resolution.value.set(this.canvas.width,
+                                       this.canvas.height,
+                                       1);
 
     this.uniforms.x_center.value = this.mandelbrot.x_center;
     this.uniforms.y_center.value = this.mandelbrot.y_center;
@@ -107,6 +109,11 @@ export class App {
   }
 
   private adjustCanvasSize() {
-    this.renderer.setSize(innerWidth, innerHeight);
+    const width = this.canvas.clientWidth;
+    const height = this.canvas.clientHeight;
+
+    if (this.canvas.width !== width || this.canvas.height !== height) {
+      this.renderer.setSize(width, height, true);
+    }
   }
 }
