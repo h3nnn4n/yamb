@@ -9,6 +9,8 @@ import {
   WebGLRenderer,
 } from 'three';
 
+import { Mandelbrot } from './mandelbrot';
+
 // tslint:disable-next-line
 const fragmentShader = require('../shaders/shader.frag')
 // tslint:disable-next-line
@@ -20,11 +22,14 @@ export class App {
   private mesh: Mesh;
   private uniforms: any;
   private canvas: HTMLCanvasElement;
+  private mandelbrot: Mandelbrot;
   private readonly renderer: WebGLRenderer;
 
   private lastTime: number = Date.now() / 1000.;
 
   constructor() {
+    this.mandelbrot = new Mandelbrot();
+
     const geometry = new PlaneGeometry(2, 2);
     this.uniforms = {
       resolution:  { value: new Vector3() },
@@ -86,15 +91,15 @@ export class App {
     this.uniforms.resolution.value.set(this.canvas.width, this.canvas.height, 1);
     this.uniforms.time.value = now;
 
-    const x_center = this.uniforms.x_center.value;
-    const y_center = this.uniforms.y_center.value;
-    const zoom = this.uniforms.zoom.value;
+    this.uniforms.x_center.value = this.mandelbrot.x_center;
+    this.uniforms.y_center.value = this.mandelbrot.y_center;
+    this.uniforms.zoom.value = this.mandelbrot.zoom;
 
-    this.uniforms.x_min.value = x_center - zoom;
-    this.uniforms.x_max.value = x_center + zoom;
+    this.uniforms.x_min.value = this.mandelbrot.x_min;
+    this.uniforms.x_max.value = this.mandelbrot.x_max;
 
-    this.uniforms.y_min.value = y_center - zoom;
-    this.uniforms.y_max.value = y_center + zoom;
+    this.uniforms.y_min.value = this.mandelbrot.y_min;
+    this.uniforms.y_max.value = this.mandelbrot.y_max;
   }
 
   private adjustCanvasSize() {
