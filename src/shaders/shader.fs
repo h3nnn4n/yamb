@@ -29,11 +29,11 @@ float process_point(vec2 c) {
 }
 
 void main() {
-  float x_min = x_center - zoom / 2.0;
-  float x_max = x_center + zoom / 2.0;
+  float x_min = x_center - zoom;
+  float x_max = x_center + zoom;
 
-  float y_min = y_center - zoom / 2.0;
-  float y_max = y_center + zoom / 2.0;
+  float y_min = y_center - zoom;
+  float y_max = y_center + zoom;
 
   vec2 uv = gl_FragCoord.xy / resolution.xy;
 
