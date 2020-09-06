@@ -8,6 +8,15 @@
       true,
       "single"
     ],
-    "no-unused-expression": false
+    "no-unused-expression": false,
+    "variable-name": {
+      "options": [
+        "ban-keywords",
+        "check-format",
+        "allow-snake-case",
+        "allow-leading-underscore",
+        "allow-pascal-case"
+      ]
+    }
   }
 }
