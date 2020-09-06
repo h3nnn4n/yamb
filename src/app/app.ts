@@ -10,9 +10,9 @@ import {
 } from 'three';
 
 // tslint:disable-next-line
-const fragmentShader = require('../shaders/shader.fs')
+const fragmentShader = require('../shaders/shader.frag')
 // tslint:disable-next-line
-const vertexShader = require('../shaders/shader.vs')
+const vertexShader = require('../shaders/shader.vert')
 
 export class App {
   private readonly scene: Scene;

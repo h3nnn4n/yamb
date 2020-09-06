@@ -20,7 +20,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(glsl|vs|fs)$/,
+        test: /\.(vert|frag)$/,
         loader: 'shader-loader'
       },
       {
