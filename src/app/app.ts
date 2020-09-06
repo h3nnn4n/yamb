@@ -25,7 +25,7 @@ export class App {
   private lastTime: number = Date.now() / 1000.;
 
   constructor() {
-    const geometry = new PlaneGeometry( 2, 2, 32 );
+    const geometry = new PlaneGeometry(2, 2);
     this.uniforms = {
       resolution:  { value: new Vector3() },
       time: { value: 0 },
@@ -50,7 +50,9 @@ export class App {
 
     this.renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
 
-    this.camera = new OrthographicCamera(-0.5, 0.5, -0.5, 0.5, 0.1, 5);
+    this.camera = new OrthographicCamera(-1, 1,
+                                         -1, 1,
+                                         -1, 1);
 
     this.adjustCanvasSize();
     this.render();
