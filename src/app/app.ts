@@ -1,3 +1,5 @@
+import 'bootstrap';
+
 import {
   Camera,
   Mesh,
@@ -10,6 +12,8 @@ import {
 } from 'three';
 
 import { Mandelbrot } from './mandelbrot';
+
+import '../style/main.scss';
 
 // tslint:disable-next-line
 const fragmentShader = require('../shaders/shader.frag')
