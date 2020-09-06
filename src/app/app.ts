@@ -7,6 +7,7 @@ import {
   PlaneGeometry,
   Scene,
   ShaderMaterial,
+  Vector2,
   Vector3,
   WebGLRenderer,
 } from 'three';
@@ -38,6 +39,7 @@ export class App {
     this.uniforms = {
       resolution:  { value: new Vector3() },
       time: { value: 0 },
+      uv_offset:  { value: new Vector2() },
 
       x_center: { value: -0.5 },
       y_center: { value: 0.0 },
@@ -90,9 +92,18 @@ export class App {
 
   private update() {
     const now = Date.now() / 1000.0;
+
+    const offset = new Vector2();
+    if (this.canvas.width > this.canvas.height) {
+      offset.y = 0.25;
+    } else {
+      offset.x = 0.25;
+    }
+
     this.lastTime = now;
 
     this.uniforms.time.value = now;
+    this.uniforms.uv_offset.value = offset;
     this.uniforms.resolution.value.set(this.canvas.width,
                                        this.canvas.height,
                                        1);

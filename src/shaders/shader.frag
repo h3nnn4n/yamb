@@ -11,6 +11,8 @@ uniform float x_max;
 uniform float y_min;
 uniform float y_max;
 
+uniform vec2 uv_offset;
+
 uniform float er;
 uniform int bailout;
 
@@ -40,11 +42,12 @@ float process_point(vec2 c) {
 }
 
 void main() {
-  vec2 uv = gl_FragCoord.xy / resolution.xy;
+  vec2 uv_square = gl_FragCoord.xy / max(resolution.x, resolution.y);
+  uv_square += uv_offset;
 
   vec2 c = vec2(gl_FragCoord.xy);
-  c.x = x_min + uv.x * (x_max - x_min);
-  c.y = y_min + uv.y * (y_max - y_min);
+  c.x = x_min + uv_square.x * (x_max - x_min);
+  c.y = y_min + uv_square.y * (y_max - y_min);
 
   float a = process_point(c);
 
