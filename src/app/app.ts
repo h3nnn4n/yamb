@@ -1,4 +1,5 @@
 import 'bootstrap';
+import * as $ from 'jquery';
 
 import {
   Camera,
@@ -13,6 +14,7 @@ import {
 } from 'three';
 
 import { Mandelbrot } from './mandelbrot';
+import { Ui } from './ui';
 
 import '../style/main.scss';
 
@@ -28,6 +30,7 @@ export class App {
   private uniforms: any;
   private canvas: HTMLCanvasElement;
   private mandelbrot: Mandelbrot;
+  private ui: Ui;
   private readonly renderer: WebGLRenderer;
 
   private lastTime: number = Date.now() / 1000.;
@@ -73,6 +76,7 @@ export class App {
     });
 
     this.renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
+    this.ui = new Ui(this.mandelbrot);
 
     this.camera = new OrthographicCamera(-1, 1,
                                          -1, 1,

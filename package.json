@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@avatsaev/three-orbitcontrols-ts": "^0.1.5",
+    "@types/jquery": "^3.5.1",
     "@types/node": "^11.13.4",
     "@types/three": "^0.93.30",
     "autoprefixer": "^9.8.6",
